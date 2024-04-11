@@ -1,6 +1,10 @@
 import React from 'react';
+import { Route, Router, RouterProvider } from 'react-router-dom';
+import router from './router';
 const App = ()=>{
-    return <div className="bg-red-800">tsx</div>
+    return (
+        <RouterProvider router={router} />
+    )
 }
 
 export default App;
