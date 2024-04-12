@@ -1,9 +1,13 @@
 <template>
-    <div>app</div>
+    <div>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script setup>
-    import { ref } from 'vue'
-    const count = ref(0)
-    const increment = () => count.value++
+
 </script>
+
+<style lang="less">
+
+</style>

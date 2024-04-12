@@ -4,6 +4,7 @@ const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = function getBaseConfig(isDev) {
     return {
+        mode:isDev?'development':'production',
         entry:{
             main:'./src/main.ts',
         },
@@ -13,6 +14,9 @@ module.exports = function getBaseConfig(isDev) {
         },
         resolve:{
             extensions:['.tsx','.ts','.jsx','.js'],
+            alias:{
+                '@':__dirname+'/src',
+            }
         },
         module:{
             rules:[
@@ -23,7 +27,44 @@ module.exports = function getBaseConfig(isDev) {
                 {
                     test:/\.(tsx|ts|jsx|js)/,
                     loader:'babel-loader',
+                },
+                {
+                    oneOf:[
+                        {
+                            test:/\.css/,
+                            use:[
+                                isDev?'style-loader':'mini-css-extract-plugin',
+                                'css-loader',
+                                'postcss-loader',
+                            ],  
+                        },
+                        {
+                            test:/\.module\.(css|less)$/,
+                            use:[
+                                isDev?'style-loader':'mini-css-extract-plugin',
+                                {
+                                    loader:'css-loader',
+                                    options:{
+                                        modules:isDev?true:{
+                                            localIdentName:'[path][name]__[local]--[hash:base64:5]',
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            test:/\.less/,
+                            use:[
+                                isDev?'style-loader':'mini-css-extract-plugin',
+                                'css-loader',
+                                'postcss-loader',
+                                'less-loader',
+                            ],
+                        },
+                    ]
                 }
+              
+             
             ]
         },
         plugins:[
