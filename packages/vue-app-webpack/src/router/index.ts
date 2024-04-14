@@ -5,7 +5,13 @@ const router = VueRouter.createRouter({
     routes: [
         {
             path:'/',
+            name:'首页',
             component: () => import('@/pages/index')
+        },
+        {
+            path:'/my',
+            name:'我的',
+            component: () => import('@/pages/my/index.vue')
         }
     ]
 })

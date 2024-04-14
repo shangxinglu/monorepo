@@ -9,7 +9,7 @@ module.exports = function getBaseConfig(isDev) {
        output:{
               path:__dirname+'/dist',
               clean:true,
-                filename:'bundle.js',
+              filename:'[name].[hash].js',
        },
        resolve:{
             extensions: ['.tsx','.ts','.jsx','.js',],
