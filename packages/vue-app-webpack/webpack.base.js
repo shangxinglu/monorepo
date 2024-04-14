@@ -2,10 +2,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { devtools } = require("vue");
 
 module.exports = function getBaseConfig(isDev) {
   return {
     mode: isDev ? "development" : "production",
+    devtool: isDev ? "eval-cheap-module-source-map" : "none",
     entry: "./src/main.ts",
     output: {
       path: __dirname + "/dist",
@@ -35,7 +37,6 @@ module.exports = function getBaseConfig(isDev) {
               loader: "ts-loader",
               options: {
                 transpileOnly: true,
-                //   appendTsSuffixTo: [/\.vue$/],
               },
             },
           ],
